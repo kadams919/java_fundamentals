@@ -24,7 +24,7 @@ public class Exercise_05 {
         int days = scanner.nextInt();
 
         // write completed code here
-
+        // testing making a change
 
         // testing change 2
 
