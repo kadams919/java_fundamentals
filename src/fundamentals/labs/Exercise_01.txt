@@ -2,21 +2,88 @@ Fundamentals Exercise 1: CLI
      Perform the following tasks using the CLI and copy and paste the commands and results below
 
      1. Navigate to CodingNomads folder (or the space you have create for this project)
+
      2. Create new folder Terminal_testing
+     katherineadams@kadams ~/CodingNomads
+     $ mkdir Terminal_testing
+
      3. Inside of folder Terminal_testing,
          a. create 3 new .txt files all with different names
+         katherineadams@kadams ~/CodingNomads
+         $ cd Terminal_testing/
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ touch example_01.txt example_02.txt example_03.txt
+
          b. print the directory path
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ pwd
+         /Users/katherineadams/CodingNomads/Terminal_testing
+
          c. list the contents of the folder
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ ls
+         example_01.txt	example_02.txt	example_03.txt
+
      5. Inside of folder Terminal_testing, create a new folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ mkdir new_folder
+
      6. Copy a file from Terminal_testing to the new folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ cp example_01.txt new_folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ ls
+     example_01.txt	example_02.txt	example_03.txt	new_folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ cd new_folder/
+     katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
+     $ ls
+     example_01.txt
+
      7. Move a different file from Terminal testing to the new folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ mv example_02.txt new_folder
+     katherineadams@kadams ~/CodingNomads/Terminal_testing
+     $ cd new_folder/
+     katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
+     $ ls
+     example_01.txt	example_02.txt
+
      8. Demonstrate removing:
          a. A file
+         katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
+         $ ls
+         example_01.txt	example_02.txt
+         katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
+         $ rm example_01.txt
+         katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
+         $ ls
+         example_02.txt
+
          b. A folder
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ ls
+         example_01.txt	example_03.txt	new_folder
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ rm -r new_folder/
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ ls
+         example_01.txt	example_03.txt
+
      9. CHALLENGE:
          a. Use $ vim to write some text inside a file
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ vim example_01.txt
+
          b. Use $ cat print contents of file
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ cat example_01.txt
+         Hello World!
+
          c. Use $ grep to search for a word inside file
+         katherineadams@kadams ~/CodingNomads/Terminal_testing
+         $ grep World example_01.txt
+         Hello World!
 
 Example Output (pwd):
     1. Cadens-MacBook-Pro:CodingNomads cadenmackenzie$ pwd

@@ -4,13 +4,62 @@
 
 Initializing git folder
     1. In CodingNomads folder, create new folder git_practice
+    katherineadams@kadams ~/CodingNomads
+    $ mkdir git_practice
+    katherineadams@kadams ~/CodingNomads
+    $ ls
+    HelloWorld.class	git_practice		projects
+    HelloWorld.java		java-awesome		resources
+    Terminal_testing	labs
+
     2. Inside git_practice:
         a. Initialize folder as a git folder (make sure you are in the correct folder when initializing)
+        katherineadams@kadams ~/CodingNomads/git_practice
+        $ git init
+        Initialized empty Git repository in /Users/katherineadams/CodingNomads/git_practice/.git/
+
         b. Make new file
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ touch new_file.txt
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ ls
+        new_file.txt
+
         c. Add file
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ git add new_file.txt
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ git status
+        On branch master
+
+        No commits yet
+
+        Changes to be committed:
+          (use "git rm --cached <file>..." to unstage)
+
+        	new file:   new_file.txt
+
         d. Commit file
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ git commit -m "committing first file"
+        [master (root-commit) 102f5fa] committing first file
+         1 file changed, 0 insertions(+), 0 deletions(-)
+         create mode 100644 new_file.txt
+
         c. On Github, create new git_practice repository
         d. Push commit file to Github
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ git remote add origin https://github.com/kadams919/git-practice.git
+        katherineadams@kadams ~/CodingNomads/git_practice (master)
+        $ git push -u origin master
+        Enumerating objects: 3, done.
+        Counting objects: 100% (3/3), done.
+        Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+        Total 3 (delta 0), reused 0 (delta 0)
+        To https://github.com/kadams919/git-practice.git
+         * [new branch]      master -> master
+        Branch 'master' set up to track remote branch 'master' from 'origin'.
+
         e. Practice the following git flow until you feel comfortable:
             i.   Create or modify file
             ii.  Add file(s)
@@ -20,11 +69,54 @@ Initializing git folder
 Adding a remote
     1. Create new personal repository on Github named "online_java-labs".
     2. On local machine, add the new remote address (directions are provided on Github with new repo is created)
+    katherineadams@kadams ~/CodingNomads/git_practice (master)
+    $ git remote add online_java_labs https://github.com/kadams919/online_java-labs.git
+    katherineadams@kadams ~/CodingNomads/git_practice (master)
+    $ git remote -v
+    git_practice	master (fetch)
+    git_practice	master (push)
+    online_java_labs	https://github.com/kadams919/online_java-labs.git (fetch)
+    online_java_labs	https://github.com/kadams919/online_java-labs.git (push)
+    origin	https://github.com/kadams919/git-practice.git (fetch)
+    origin	https://github.com/kadams919/git-practice.git (push)
+
     3. Push local git repository to your Github using the new remote.
+    katherineadams@kadams ~/CodingNomads/git_practice (master)
+    $ git push online_java_labs master
+    Enumerating objects: 3, done.
+    Counting objects: 100% (3/3), done.
+    Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    To https://github.com/kadams919/online_java_labs.git
+     * [new branch]      master -> master
 
 Cloning repository from Github
     1. Find a repository on Github
     2. Clone repository to local machine
+    katherineadams@kadams ~/CodingNomads/git_practice (master)
+    $ git clone https://github.com/akullpp/awesome-java.git
+    Cloning into 'awesome-java'...
+    remote: Enumerating objects: 15, done.
+    remote: Counting objects: 100% (15/15), done.
+    remote: Compressing objects: 100% (15/15), done.
+    remote: Total 3734 (delta 8), reused 0 (delta 0), pack-reused 3719
+    Receiving objects: 100% (3734/3734), 1.44 MiB | 4.77 MiB/s, done.
+    Resolving deltas: 100% (1935/1935), done.
+
     3. Create new repository on Github
     4. Add new remote on local machine
+    katherineadams@kadams ~/CodingNomads/git_practice (master)
+    $ git remote add orig_java_awesome https://github.com/akullpp/awesome-java.git
+
     5. Push to new Github repository
+    katherineadams@kadams ~/CodingNomads/git_practice/awesome-java (master)
+    $ git push java_awesome master
+    Enumerating objects: 3737, done.
+    Counting objects: 100% (3737/3737), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (1793/1793), done.
+    Writing objects: 100% (3737/3737), 1.42 MiB | 1.67 MiB/s, done.
+    Total 3737 (delta 1941), reused 3728 (delta 1935)
+    remote: Resolving deltas: 100% (1941/1941), done.
+    To https://github.com/kadams919/java_awesome.git
+     * [new branch]      master -> master

@@ -23,10 +23,9 @@ public class Exercise_05 {
         // assign input to variable as int
         int days = scanner.nextInt();
 
-        // write completed code here
-        // testing making a change
+        int seconds = days * 24 * 60 * 60;
 
-        // testing change 2
+        System.out.println("The number of seconds in " + days + "days is " + seconds);
 
     }
 }
