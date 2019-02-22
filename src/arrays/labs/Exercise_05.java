@@ -10,4 +10,17 @@ package arrays.labs;
 
 public class Exercise_05 {
 
+    public static void main(String[] args) {
+        int[] arr = new int[16];
+
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = i;
+        }
+
+        for(int i = 15; i >= 0; i--) {
+            System.out.print(arr[i] + " ");
+            i--;
+        }
+    }
+
 }
