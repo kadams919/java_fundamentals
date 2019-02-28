@@ -8,6 +8,13 @@ package objects_classes_methods.labs.objects;
 
 public class ObjectAssociation {
 
+    public static void main(String[] args) {
+        Student student = new Student("Katie Adams");
+        Course course = new Course("Java Fundamentals");
+
+        System.out.println("The student named " + student.name + " is enrolled in the "
+                + course.courseName + " class.");
+    }
 }
 
 class Student {
