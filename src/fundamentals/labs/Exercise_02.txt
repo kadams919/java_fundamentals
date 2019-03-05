@@ -1,6 +1,6 @@
 1) If you haven't already, please create a Github account if you have not already done so.
 
-2) Once complete practice the following on your own machine:
+2) Once complete, practice the following on your own machine and paste the commands you run for each step below.
 
 Initializing git folder
     1. In CodingNomads folder, create new folder git_practice
@@ -18,6 +18,8 @@ Initializing git folder
         $ git init
         Initialized empty Git repository in /Users/katherineadams/CodingNomads/git_practice/.git/
 
+        a. Initialize folder as a git folder (make sure you are in the correct folder when initializing) by running
+            the "git init" command within the git_practice folder.
         b. Make new file
         katherineadams@kadams ~/CodingNomads/git_practice (master)
         $ touch new_file.txt
@@ -47,6 +49,8 @@ Initializing git folder
          create mode 100644 new_file.txt
 
         c. On Github, create new git_practice repository
+        d. Add this new GitHub repository as a new "remote" to your local Git repo. You can do this by using the command
+            git remote add <ANY_NAME> <URL_OF_NEW_GITHUB_REPO.git>
         d. Push commit file to Github
         katherineadams@kadams ~/CodingNomads/git_practice (master)
         $ git remote add origin https://github.com/kadams919/git-practice.git

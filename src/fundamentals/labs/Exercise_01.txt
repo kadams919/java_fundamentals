@@ -29,6 +29,7 @@ Fundamentals Exercise 1: CLI
      $ mkdir new_folder
 
      6. Copy a file from Terminal_testing to the new folder
+<<<<<<< HEAD
      katherineadams@kadams ~/CodingNomads/Terminal_testing
      $ cp example_01.txt new_folder
      katherineadams@kadams ~/CodingNomads/Terminal_testing
@@ -49,6 +50,7 @@ Fundamentals Exercise 1: CLI
      $ ls
      example_01.txt	example_02.txt
 
+     7. Move a different file from Terminal_testing to the new folder
      8. Demonstrate removing:
          a. A file
          katherineadams@kadams ~/CodingNomads/Terminal_testing/new_folder
