@@ -16,28 +16,52 @@ public class BlackjackController {
 
     public void playBlackjack() {
 
-        Player player = createNewPlayer("Katie");
-        Player computer = createNewPlayer("Computer");
+        Player player = Player.createNewPlayer("Katie", deck);
+        Player computer = Player.createNewPlayer("Computer", deck);
 
         Scanner scanner = new Scanner(System.in);
 
         boolean continuePlaying = true;
+        boolean continueDealing = true;
+        boolean continueComputerDealing = true;
 
         while (continuePlaying) {
             System.out.println("Your current hand is " + player.getBlackjackHand().toString());
+            String response;
+            do {
 
-            System.out.println("Would you like another card? (y/n)");
+                if(continueDealing) {
 
-            String response = scanner.next();
+                    System.out.println("Would you like another card? (y/n)");
 
-            if (response.equalsIgnoreCase("y")) {
-                deck.deal(player);
-                System.out.println("Your current hand is " + player.getBlackjackHand().toString());
+                    response = scanner.next();
+
+                    if (response.equalsIgnoreCase("y")) {
+                        deck.deal(player);
+                        System.out.println("Your current hand is " + player.getBlackjackHand().toString());
+                    } else {
+                        continueDealing = false;
+                    }
+                }
+
+                if (playForComputer(computer)) {
+                    deck.deal(computer);
+                } else {
+                    continueComputerDealing = false;
+                }
+
+            } while (continueDealing || continueComputerDealing);
+
+            if ((player.getBlackjackHand().getHandValue() > computer.getBlackjackHand().getHandValue())
+                    && player.getBlackjackHand().getHandValue() < 22) {
+
+                System.out.println("Congrats! You win!");
+            } else {
+                System.out.println("You lose :(");
             }
 
-            if (playForComputer(computer)) {
-                deck.deal(computer);
-            }
+            System.out.println("Your hand: " + player.getBlackjackHand().toString());
+            System.out.println("Computer's hand: " + computer.getBlackjackHand().toString());
 
             System.out.println("Would you like to continue playing? (y/n)");
 
@@ -45,20 +69,13 @@ public class BlackjackController {
 
             if (response.equalsIgnoreCase("n")) {
                 continuePlaying = false;
+            } else {
+                deck.shuffleDeck();
+                player = Player.createNewPlayer("Katie", deck);
+                computer = Player.createNewPlayer("Computer", deck);
             }
 
         }
-
-        if ((player.getBlackjackHand().getHandValue() > computer.getBlackjackHand().getHandValue())
-                && player.getBlackjackHand().getHandValue() < 22) {
-
-            System.out.println("Congrats! You win!");
-        } else {
-            System.out.println("You lose :(");
-        }
-
-        System.out.println("Your hand: " + player.getBlackjackHand().toString());
-        System.out.println("Computer's hand: " + computer.getBlackjackHand().toString());
 
     }
 
@@ -70,11 +87,5 @@ public class BlackjackController {
         }
     }
 
-    private Player createNewPlayer(String name) {
-        Player player = new Player(name, 10);
-        deck.deal(player);
-        deck.deal(player);
 
-        return player;
-    }
 }

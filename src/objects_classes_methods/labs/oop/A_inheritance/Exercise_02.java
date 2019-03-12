@@ -5,6 +5,7 @@ package objects_classes_methods.labs.oop.A_inheritance;
  *
  * Your answer:
  *
+ * Base class variables will always be used unless the super keyword is used to modify it.
  */
 class A {
     int i = 10;

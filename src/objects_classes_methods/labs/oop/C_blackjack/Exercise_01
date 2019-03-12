@@ -18,7 +18,7 @@ It will not ask for bets. The user and the computer will each start with a small
         char[] suit = new char[]{'♠', '♦', '♥', '♣'};
         int cardValue;
 
-    Deck.java (POJO - this will hold deck data)
+    Deck.java (POJO - this will hold blackjackDeck data)
         Card[] cards;
         ArrayList<Integer> usedCards;
 

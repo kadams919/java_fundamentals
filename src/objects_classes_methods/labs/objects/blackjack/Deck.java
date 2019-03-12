@@ -31,7 +31,6 @@ public class Deck {
 
         do {
             n = random.nextInt(52);
-            System.out.println(n);
             if(!used.contains(n)) {
                 player.getBlackjackHand().getHand().add(deck[n]);
                 used.add(n);

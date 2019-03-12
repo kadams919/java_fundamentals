@@ -4,7 +4,7 @@ package objects_classes_methods.labs.oop.A_inheritance;
  * Why does the output print in the order it does?
  *
  * You answer:
- *
+ * Parent class constructors are always called first before subclasses.
  */
 
 class A_1 {

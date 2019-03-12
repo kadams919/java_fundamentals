@@ -1,7 +1,6 @@
-package objects_classes_methods.labs.objects.blackjack;
+package objects_classes_methods.labs.oop.C_blackjack.blackjack;
 
-import objects_classes_methods.labs.objects.blackjack.BlackjackHand;
-import objects_classes_methods.labs.objects.blackjack.Card;
+import objects_classes_methods.labs.oop.C_blackjack.card_games.Card;
 
 public class Player {
 
@@ -13,7 +12,6 @@ public class Player {
 
     public Player() {
         this.blackjackHand = new BlackjackHand();
-
     }
 
     public Player(String name, int currentStackValue) {
@@ -30,14 +28,18 @@ public class Player {
         return blackjackHand;
     }
 
-    public void addCardToHand(Card card) {
-        this.blackjackHand.getHand().add(card);
+    public static Player createNewPlayer(BlackjackDeck blackjackDeck) {
+        Player player = new Player("Computer", 10);
+        blackjackDeck.deal(player);
+        blackjackDeck.deal(player);
+
+        return player;
     }
 
-    public static Player createNewPlayer(String name, Deck deck) {
+    public static Player createNewPlayer(String name, BlackjackDeck blackjackDeck) {
         Player player = new Player(name, 10);
-        deck.deal(player);
-        deck.deal(player);
+        blackjackDeck.deal(player);
+        blackjackDeck.deal(player);
 
         return player;
     }
