@@ -1,4 +1,4 @@
-package labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.card_games;
+package labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.common;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class Deck {
     private void populateDeck() {
         int count = 0;
         for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 13; j++) {
+            for(int j = 1; j < 14; j++) {
                 Card card = new Card(i, j);
                 deck[count] = card;
                 count++;

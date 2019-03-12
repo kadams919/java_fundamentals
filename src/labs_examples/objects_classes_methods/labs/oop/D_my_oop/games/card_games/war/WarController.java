@@ -1,6 +1,6 @@
-package labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.war;
+package labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.war;
 
-import labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.card_games.Card;
+import labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.common.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ public class WarController {
 
     public void playWar() {
 
-        Player player = Player.createNewPlayer("Katie", warDeck);
-        Player computer = Player.createNewPlayer(warDeck);
+        WarPlayer warPlayer = new WarPlayer("Katie", warDeck);
+        WarPlayer computer = new WarPlayer("Computer", warDeck);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -30,9 +30,9 @@ public class WarController {
 
             do {
 
-                goToWar(player, computer);
+                goToWar(warPlayer, computer);
 
-                System.out.println("Number of cards in hand: " + player.getWarHand().getHand().size());
+                System.out.println("Number of cards in hand: " + warPlayer.getWarHand().getHand().size());
                 System.out.println("Would you like to keep playing?");
                 String response = scanner.next();
 
@@ -40,12 +40,12 @@ public class WarController {
                     continueDealing = false;
                 }
             } while (continueDealing
-                    && player.getWarHand().getHand().size() > 0
+                    && warPlayer.getWarHand().getHand().size() > 0
                     && computer.getWarHand().getHand().size() > 0);
 
     }
 
-    public void printCards(Player player, Player computer, int numCards, Card playerCard, Card computerCard) {
+    public void printCards(WarPlayer warPlayer, WarPlayer computer, int numCards, Card playerCard, Card computerCard) {
         System.out.println("Your card:" + "    " + "Computer's card:");
         System.out.println("┌─────────┐    ┌─────────┐");
 
@@ -68,21 +68,21 @@ public class WarController {
         System.out.println("\n└─────────┘    └─────────┘");
     }
 
-    private void goToWar(Player player, Player computer) {
+    private void goToWar(WarPlayer warPlayer, WarPlayer computer) {
         List<Card> playersWarCards = new ArrayList<>();
         List<Card> computersWarCards = new ArrayList<>();
 
-        List<Card> playersCards = player.getWarHand().getHand();
+        List<Card> playersCards = warPlayer.getWarHand().getHand();
         List<Card> computersCards = computer.getWarHand().getHand();
 
-        printCards(player, computer, 1, playersCards.get(0),
+        printCards(warPlayer, computer, 1, playersCards.get(0),
                     computersCards.get(0));
 
         if (playersCards.get(0).getValue()
                     > computersCards.get(0).getValue()) {
 
             System.out.println("You win this round of war!");
-            giveWinnerCards(player, computer, playersCards, computersCards, 1);
+            giveWinnerCards(warPlayer, computer, playersCards, computersCards, 1);
             playersWarCards.clear();
             computersWarCards.clear();
 
@@ -90,31 +90,29 @@ public class WarController {
                     > playersCards.get(playersCards.size() - 1).getValue()) {
 
             System.out.println("Computer wins this round of war!");
-            giveWinnerCards(computer, player, computersCards, playersCards, 1);
+            giveWinnerCards(computer, warPlayer, computersCards, playersCards, 1);
             playersWarCards.clear();
             computersWarCards.clear();
 
         } else {
             System.out.println("It's a tie! To War!");
-            breakTie(player, computer, playersWarCards, computersWarCards, 3);
+            breakTie(warPlayer, computer, playersWarCards, computersWarCards, 3);
         }
     }
 
-    private void breakTie(Player player, Player computer, List<Card> playersWarCards, List<Card> computersWarCards, int numCards) {
-        addWarCards(player, computer, playersWarCards, computersWarCards);
-
-//
+    private void breakTie(WarPlayer warPlayer, WarPlayer computer, List<Card> playersWarCards, List<Card> computersWarCards, int numCards) {
+        addWarCards(warPlayer, computer, playersWarCards, computersWarCards);
 
 
     }
 
-    private void addWarCards(Player player, Player computer, List<Card> playersWarCards, List<Card> computersWarCards) {
+    private void addWarCards(WarPlayer warPlayer, WarPlayer computer, List<Card> playersWarCards, List<Card> computersWarCards) {
 
-        if(player.getWarHand().getHand().size() < 3 || computer.getWarHand().getHand().size() < 3) {
-            if(player.getWarHand().getHand().size() < 3 ) {
-                int playerNumCards = player.getWarHand().getHand().size() - 1;
+        if(warPlayer.getWarHand().getHand().size() < 3 || computer.getWarHand().getHand().size() < 3) {
+            if(warPlayer.getWarHand().getHand().size() < 3 ) {
+                int playerNumCards = warPlayer.getWarHand().getHand().size() - 1;
                 for (int i = 0; i < playerNumCards; i++) {
-                    playersWarCards.add(player.getWarHand().getHand().get(i));
+                    playersWarCards.add(warPlayer.getWarHand().getHand().get(i));
                 }
             }
 
@@ -127,12 +125,12 @@ public class WarController {
         } else {
             for(int i = 0; i < 3; i++) {
                 computersWarCards.add(computer.getWarHand().getHand().get(i));
-                playersWarCards.add(player.getWarHand().getHand().get(i));
+                playersWarCards.add(warPlayer.getWarHand().getHand().get(i));
             }
         }
     }
 
-    private void giveWinnerCards(Player winner, Player loser, List<Card> winnerHand, List<Card> loserHand, int numCardsToGive) {
+    private void giveWinnerCards(WarPlayer winner, WarPlayer loser, List<Card> winnerHand, List<Card> loserHand, int numCardsToGive) {
 
 
         for(int i = 0; i < numCardsToGive; i++) {

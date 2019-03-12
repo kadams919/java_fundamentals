@@ -1,16 +1,9 @@
-package labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.blackjack;
+package labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.blackjack;
 
-import labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.card_games.Card;
+import labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.common.Card;
+import labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.common.Hand;
 
-import java.util.ArrayList;
-
-public class BlackjackHand {
-
-    private ArrayList<Card> hand = new ArrayList();
-
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
+public class BlackjackHand extends Hand {
 
     public int getHandValue() {
         return calculateHandValue();
@@ -29,8 +22,8 @@ public class BlackjackHand {
         return score;
     }
 
-    public String toString(Player player) {
-        if(player.getName().equalsIgnoreCase("computer")) {
+    public String toString(BlackjackPlayer blackjackPlayer) {
+        if(blackjackPlayer.getName().equalsIgnoreCase("computer")) {
             return "\nThe computer's hand value is: " + calculateHandValue();
         } else {
             StringBuilder sb = new StringBuilder();
@@ -40,13 +33,14 @@ public class BlackjackHand {
                 sb.append("\n");
                 if (c.getValue() == 1) {
                     sb.append("Ace of ");
-                } else if (c.getValue() >= 2 && c.getValue() <= 9) {
+                } else if (c.getValue() >= 2 && c.getValue() <= 10) {
+
                     sb.append(c.getValue() + " of ");
-                } else if (c.getValue() == 10) {
-                    sb.append("Jack of ");
                 } else if (c.getValue() == 11) {
+                    sb.append("Jack of ");
+                } else if (c.getValue() == 12) {
                     sb.append("Queen of ");
-                } else if (c.getValue() == 12){
+                } else if (c.getValue() == 13){
                     sb.append("King of ");
                 }
                 sb.append(c.getSuit());

@@ -1,6 +1,6 @@
-package labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.blackjack;
+package labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.blackjack;
 
-import labs_examples.objects_classes_methods.labs.oop.D_my_oop.card_games.card_games.Deck;
+import labs_examples.objects_classes_methods.labs.oop.D_my_oop.games.card_games.common.Deck;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +9,7 @@ public class BlackjackDeck extends Deck {
 
     ArrayList<Integer> used = new ArrayList();
 
-    public void deal(Player player) {
+    public void deal(BlackjackPlayer blackjackPlayer) {
 
         Random random = new Random();
         int n;
@@ -18,7 +18,7 @@ public class BlackjackDeck extends Deck {
         do {
             n = random.nextInt(52);
             if(!used.contains(n)) {
-                player.getBlackjackHand().getHand().add(super.getDeck()[n]);
+                blackjackPlayer.getBlackjackHand().getHand().add(super.getDeck()[n]);
                 used.add(n);
                 dealt = true;
             }
