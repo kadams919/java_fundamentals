@@ -45,26 +45,60 @@ public class WarController {
 
     }
 
-    public void printCards(WarPlayer warPlayer, WarPlayer computer, int numCards, Card playerCard, Card computerCard) {
-        System.out.println("Your card:" + "    " + "Computer's card:");
-        System.out.println("┌─────────┐    ┌─────────┐");
+    public void printCards(List<Card> playerCards, List<Card> computerCards,
+                           Card playerCard, Card computerCard,
+                           int numPlayerCards, int numComputerCards) {
 
-        //for(int i = 1; i < numCards - 1; i++) {
-        //    System.out.println("┌─────────┐    ┌─────────┐");
-        //}
+        int playerCardVal = playerCard.getValue();
+        int computerCardVal = computerCard.getValue();
+
+        char playerSuit = playerCard.getSuit();
+        char computerSuit = computerCard.getSuit();
+
+        System.out.println("Your card:" + "    " + "Computer's card:");
+
+        int difference = 0;
+
+        if (numPlayerCards > numComputerCards) {
+            difference = numPlayerCards - numComputerCards;
+            for(int i = 0; i < numPlayerCards; i++) {
+                if(difference > 0) {
+                    System.out.println("┌─────────┐             ");
+                    difference--;
+                } else {
+                    System.out.println("┌─────────┐    ┌─────────┐");
+                }
+            }
+        } else if(numComputerCards > numPlayerCards){
+            difference = numComputerCards - numPlayerCards;
+            for(int i = 0; i < numComputerCards; i++) {
+                if(difference > 0) {
+                    System.out.println("             ┌─────────┐");
+                    difference--;
+                } else {
+                    System.out.println("┌─────────┐    ┌─────────┐");
+                }
+            }
+        } else if (numPlayerCards > 1 && numComputerCards > 1){
+            for(int i = 0; i < numPlayerCards; i++) {
+                System.out.println("┌─────────┐    ┌─────────┐");
+            }
+        } else {
+            System.out.println("┌─────────┐    ┌─────────┐");
+        }
+
         System.out.printf("|%s        |    |%s        |",
-                playerCard.getSuit(),
-                computerCard.getSuit());
+                playerSuit,
+                computerSuit);
         System.out.println("\n|         |    |         |");
         System.out.println("|         |    |         |");
         System.out.printf("|    %d    |    |    %d    |",
-                playerCard.getValue(),
-                computerCard.getValue());
+                playerCardVal, computerCardVal);
         System.out.println("\n|         |" + "    " + "|         |");
         System.out.println("|         |" + "    " + "|         |");
         System.out.printf("|        %s|    |        %s|",
-                playerCard.getSuit(),
-                computerCard.getSuit());
+                playerSuit,
+                computerSuit);
         System.out.println("\n└─────────┘    └─────────┘");
     }
 
@@ -75,35 +109,60 @@ public class WarController {
         List<Card> playersCards = warPlayer.getWarHand().getHand();
         List<Card> computersCards = computer.getWarHand().getHand();
 
-        printCards(warPlayer, computer, 1, playersCards.get(0),
-                    computersCards.get(0));
+        printCards(playersCards, computersCards, playersCards.get(0),
+                    computersCards.get(0), 1, 1);
 
         if (playersCards.get(0).getValue()
                     > computersCards.get(0).getValue()) {
 
             System.out.println("You win this round of war!");
-            giveWinnerCards(warPlayer, computer, playersCards, computersCards, 1);
+            giveWinnerCards(warPlayer, computer, playersCards, computersCards, 1, 1);
             playersWarCards.clear();
             computersWarCards.clear();
 
-        } else if (computersCards.get(computersCards.size() - 1).getValue()
-                    > playersCards.get(playersCards.size() - 1).getValue()) {
+        } else if (computersCards.get(0).getValue()
+                    > playersCards.get(0).getValue()) {
 
             System.out.println("Computer wins this round of war!");
-            giveWinnerCards(computer, warPlayer, computersCards, playersCards, 1);
+            giveWinnerCards(computer, warPlayer, computersCards, playersCards, 1, 1);
             playersWarCards.clear();
             computersWarCards.clear();
 
         } else {
             System.out.println("It's a tie! To War!");
-            breakTie(warPlayer, computer, playersWarCards, computersWarCards, 3);
+            breakTie(warPlayer, computer, playersWarCards, computersWarCards);
         }
     }
 
-    private void breakTie(WarPlayer warPlayer, WarPlayer computer, List<Card> playersWarCards, List<Card> computersWarCards, int numCards) {
+    private void breakTie(WarPlayer warPlayer, WarPlayer computer, List<Card> playersWarCards,
+                          List<Card> computersWarCards) {
+
         addWarCards(warPlayer, computer, playersWarCards, computersWarCards);
 
+        printCards(playersWarCards, computersWarCards, playersWarCards.get(playersWarCards.size() - 1),
+                computersWarCards.get(computersWarCards.size() - 1),
+                playersWarCards.size(), computersWarCards.size());
 
+        if(playersWarCards.get(playersWarCards.size() - 1).getValue()
+                > computersWarCards.get(computersWarCards.size() - 1).getValue()) {
+
+            System.out.println("You win this one!");
+            giveWinnerCards(warPlayer, computer, playersWarCards, computersWarCards,
+                    playersWarCards.size(), computersWarCards.size());
+
+        } else if(computersWarCards.get(computersWarCards.size() - 1).getValue()
+                > playersWarCards.get(playersWarCards.size() - 1).getValue()) {
+
+            System.out.println("Computer wins this one!");
+            giveWinnerCards(computer, warPlayer, computersWarCards, playersWarCards,
+                    computersWarCards.size(), playersWarCards.size());
+
+        } else {
+
+            System.out.println("Another tie!");
+            breakTie(warPlayer, computer, playersWarCards, computersWarCards);
+
+        }
     }
 
     private void addWarCards(WarPlayer warPlayer, WarPlayer computer, List<Card> playersWarCards, List<Card> computersWarCards) {
@@ -130,17 +189,18 @@ public class WarController {
         }
     }
 
-    private void giveWinnerCards(WarPlayer winner, WarPlayer loser, List<Card> winnerHand, List<Card> loserHand, int numCardsToGive) {
+    private void giveWinnerCards(WarPlayer winner, WarPlayer loser, List<Card> winnerHand,
+                                 List<Card> loserHand, int winnerCardsToGive,
+                                 int loserCardsToGive) {
 
-
-        for(int i = 0; i < numCardsToGive; i++) {
-            Card winnerCard = winnerHand.get(0);
-            Card loserCard = loserHand.get(0);
-
-            winner.getWarHand().getHand().add(loserCard);
+        for(int i = 0; i < winnerCardsToGive; i++) {
+            winner.getWarHand().getHand().add(winnerHand.get(0));
             winner.getWarHand().getHand().remove(0);
-            winner.getWarHand().getHand().add(winnerCard);
-            loser.getWarHand().getHand().remove(loserCard);
+        }
+
+        for(int i = 0; i < loserCardsToGive; i++) {
+            winner.getWarHand().getHand().add(loserHand.get(0));
+            loser.getWarHand().getHand().remove(0);
         }
     }
 }
