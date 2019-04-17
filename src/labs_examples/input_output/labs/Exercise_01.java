@@ -1,5 +1,7 @@
 package labs_examples.input_output.labs;
 
+import java.io.*;
+
 /**
  * Input/Output Exercise 1: File input/output
  *
@@ -9,3 +11,46 @@ package labs_examples.input_output.labs;
  *
  */
 
+public class Exercise_01 {
+
+    public static void main(String[] args) {
+
+        FileInputStream fileInputStream = null;
+        FileOutputStream fileOutputStream = null;
+        String filePath = "src/labs_examples/input_output/files/byte_data";
+        int j = 0;
+
+        try {
+            fileInputStream = new FileInputStream(filePath);
+            fileOutputStream = new FileOutputStream("exercise_01.txt");
+
+            do {
+                for(int i = 0; i < 5; i++) {
+                    j = fileInputStream.read();
+                    if(j != -1) {
+                        fileOutputStream.write(j);
+                    }
+                }
+            } while (j != -1);
+
+        } catch(FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch(IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            try {
+                if(fileInputStream != null) {
+                    fileInputStream.close();
+                }
+
+                if(fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            } catch(IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        }
+    }
+
+}
