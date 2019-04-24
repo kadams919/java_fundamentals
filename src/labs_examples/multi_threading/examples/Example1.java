@@ -2,7 +2,8 @@ package labs_examples.multi_threading.examples;
 
 // Create a thread by implementing Runnable.
 
-class MyThread implements Runnable {
+class
+MyThread implements Runnable {
     String thrdName;
 
     MyThread(String name) {
