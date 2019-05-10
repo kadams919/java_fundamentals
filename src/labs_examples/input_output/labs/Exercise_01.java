@@ -54,3 +54,20 @@ public class Exercise_01 {
     }
 
 }
+class Example {
+    public static void main(String[] args) {
+
+        int[] vals = {1,2,3,4,5};
+
+        for(int i = 0; i < vals.length/2; ++i){
+            int temp = vals[i];
+            vals[i] = vals[vals.length - 1 -i];
+            vals[vals.length - 1 -i] = temp;
+        }
+
+        for(int i : vals){
+            System.out.println(i);
+        }
+
+    }
+}
