@@ -1,5 +1,8 @@
 package labs_examples.lambdas.labs;
 
+import java.lang.FunctionalInterface;
+import java.util.function.Supplier;
+
 /**
  * Lambdas Exercise 1:
  *
@@ -23,3 +26,43 @@ package labs_examples.lambdas.labs;
  *
  *
  */
+public class Exercise_01 {
+
+    public static void main(String[] args) {
+        FunctionalInterfaceExample myFuncInterface = () -> {
+            System.out.println("New thread created");
+        };
+        myFuncInterface.exampleMethod();
+
+        FunctionalInterfaceOneParam functionalInterfaceOneParam = (x) -> {
+            System.out.println("The int is " + x);
+        };
+        functionalInterfaceOneParam.exampleMethod(5);
+
+        FunctionalInterfaceTwoParams functionalInterfaceTwoParams = (a, b) -> {
+            System.out.println("THe first string is " + a + " and the second string is " + b);
+        };
+        functionalInterfaceTwoParams.exampleMethod("Hi!", "Bye!");
+
+        Supplier<Double> randomVal = () -> Math.random();
+
+        System.out.println(randomVal.get());
+    }
+}
+
+@FunctionalInterface
+interface FunctionalInterfaceExample {
+    public void exampleMethod();
+}
+
+@FunctionalInterface
+interface FunctionalInterfaceOneParam {
+    public void exampleMethod(int a);
+}
+
+@FunctionalInterface
+interface FunctionalInterfaceTwoParams {
+    public void exampleMethod(String a, String b);
+}
+
+
