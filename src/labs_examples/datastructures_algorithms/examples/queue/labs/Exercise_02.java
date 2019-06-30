@@ -16,3 +16,146 @@ package labs_examples.datastructures_algorithms.examples.queue.labs;
  *      6) contain a method to print out the data of all elements in the Queue
  *
  */
+
+public class Exercise_02 {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>();
+
+        try {
+            queue.add(1);
+            queue.add(2);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.add(3);
+            queue.print();
+            queue.remove();
+            queue.print();
+            queue.peekFirst();
+            queue.peekLast();
+            System.out.println(queue.size());
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+class Queue<T> {
+
+    T[] queue;
+    int position = 0;
+
+    public Queue() {
+
+        queue = (T[])new Object[10];
+
+    }
+
+    public void add(T obj) {
+        queue = resize();
+        queue[position] = obj;
+        position++;
+    }
+
+    public void remove() {
+        queue = resize();
+        queue[0] = null;
+        T[] newQueue;
+        if(size() > 10)  {
+            newQueue = (T[]) new Object[queue.length - 1];
+            for(int i = 0; i < newQueue.length; i++) {
+                newQueue[i] = queue[i + 1];
+            }
+        } else {
+            newQueue = (T[]) new Object[10];
+            for(int i = 0; i < 9; i++) {
+                newQueue[i] = queue[i + 1];
+            }
+        }
+        position--;
+        queue = newQueue;
+    }
+
+    public void peekFirst() throws EmptyQueueException {
+
+        if(position < 0) {
+
+            throw new EmptyQueueException("The stack is empty.");
+
+        } else {
+            System.out.println(queue[0]);
+        }
+    }
+
+    public void peekLast() throws EmptyQueueException {
+
+        if(position < 0) {
+
+            throw new EmptyQueueException("The stack is empty");
+
+        } else {
+
+            System.out.println(queue[position - 1]);
+        }
+    }
+
+    public int size() {
+
+        return position;
+
+    }
+
+    public T[] resize() {
+
+        if(position > 10 && position > (double)(queue.length * 0.75)) {
+
+            T[] newQueue = (T[]) new Object[queue.length * 2];
+
+            for(int i = 0; i < newQueue.length; i++) {
+                if(queue[i] != null) {
+                    newQueue[i] = queue[i];
+                }
+            }
+
+            return newQueue;
+
+        } else if(position > 10 && position < (double)(queue.length * 0.25)) {
+
+            T[] newQueue = (T[]) new Object[queue.length / 2];
+
+            for(int i = 0; i < newQueue.length; i++) {
+                if(queue[i] != null) {
+                    newQueue[i] = queue[i];
+                }
+            }
+
+            return newQueue;
+        }
+
+        return queue;
+
+    }
+
+    public void print() {
+        for (int i = 0; i < position; i++) {
+            System.out.println(queue[i]);
+        }
+    }
+
+
+}
+
+
+class EmptyQueueException extends Exception {
+
+    EmptyQueueException(String s) {
+
+        super(s);
+
+    }
+
+}
